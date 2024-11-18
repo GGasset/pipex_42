@@ -6,7 +6,7 @@
 #    By: ggasset- <ggasset-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/18 13:31:00 by ggasset-          #+#    #+#              #
-#    Updated: 2024/11/18 15:08:14 by ggasset-         ###   ########.fr        #
+#    Updated: 2024/11/18 20:53:54 by ggasset-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,8 +29,9 @@ TEST_C_FILES = $(shell echo "${GNL_C_FILES} ${LIBFT_C_FILES} ${PIPEX_C_FILES}")
 NAME = pipex
 TEST_NAME = test_pipex
 
+LOGO=\n ▗▄▄▖ ▗▄▄▖\n▐▌   ▐▌   \n▐▌▝▜▌▐▌▝▜▌\n▝▚▄▞▘▝▚▄▞▘\n          \n          \n          \n
 
-all: ${NAME}
+all: logo ${NAME}
 
 test: ${TEST_NAME}
 
@@ -45,6 +46,9 @@ ${NAME}: ${C_FILES}
 ${TEST_NAME}: ${TEST_C_FILES}
 	cc -o ${TEST_NAME} $? main_test.c
 
+logo:
+	@echo "${LOGO}"
+	@sleep 1
+
 %.o: %.c
-	echo $?
 	cc -c -Wall -Werror -Wextra $?
