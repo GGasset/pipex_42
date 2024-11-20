@@ -6,7 +6,7 @@
 /*   By: germangasset <germangasset@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 13:07:30 by ggasset-          #+#    #+#             */
-/*   Updated: 2024/11/20 16:54:35 by germangasse      ###   ########.fr       */
+/*   Updated: 2024/11/20 16:58:41 by germangasse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,9 @@ int			pipex(t_args_d *args, t_argv *argv);
 int			write_infile(int write_fd, t_args_d *args);
 int			write_outfile(int read_fd, t_args_d *args);
 t_args_d	*parse_args(int argc, char *argv[], char *envp[]); // TODO
-t_bool		free_args_d(t_args_d *args); //TODO
 t_argv		*get_program_argv(char *argv[]); // TODO
+t_bool		free_args_d(t_args_d *args); //TODO
 t_bool		free_argv(t_argv *argv); // TODO
+void		notify_return_status(int status); // TODO
 
 #endif

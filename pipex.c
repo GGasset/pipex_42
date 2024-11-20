@@ -6,7 +6,7 @@
 /*   By: germangasset <germangasset@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 16:38:20 by ggasset-          #+#    #+#             */
-/*   Updated: 2024/11/20 16:30:58 by germangasse      ###   ########.fr       */
+/*   Updated: 2024/11/20 16:57:24 by germangasse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,14 @@ int	pipex(t_args_d *args, t_argv *argv)
 		pids[1] = fork();
 		if (pids[1] > 0)
 		{
-			write_infile(pipx[0][1], args);
+			return_status = write_infile(pipx[0][1], args);
+			if (return_status)
+				return (return_status);
 			waitpid(pids[0], 0, 0);
 			waitpid(pids[1], 0, 0);
-			write_outfile(pipx[2][0], args);
+			return_status = write_outfile(pipx[2][0], args);
+			if (return_status)
+				return (return_status);
 		}
 		else
 			forked(1, args, argv, pipx);
