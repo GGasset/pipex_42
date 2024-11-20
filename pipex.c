@@ -3,25 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ggasset- <ggasset-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: germangasset <germangasset@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 16:38:20 by ggasset-          #+#    #+#             */
-/*   Updated: 2024/11/18 20:33:48 by ggasset-         ###   ########.fr       */
+/*   Updated: 2024/11/20 16:30:58 by germangasse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-static void	forked(int prog_n, t_args_d *prog_d, t_argv *argv_d, int pipe[2])
+/* 
+pipes:
+	pipe[0] --> stdin pipe, program will read from pipe[0][0]
+	pipe[1] --> stdout pipe, program will write to pipe[1][1]
+*/
+static void	forked(int prog_n, t_args_d *prog_d, t_argv *argv_d, int pipx[3][2])
 {
 	char	*program_path;
 	char	**argv;
 
 	program_path = prog_d->program1 + prog_n;
 	argv = argv_d->argv1 + prog_n;
-	dup2(pipe[0], 0);
-	dup2(pipe[1], 1);
+	dup2(pipx[prog_n][0], 0);
+	dup2(pipx[prog_n + 1][1], 1);
 	execve(program_path, argv, prog_d->envp);
+}
+
+static void	create_pipes(int pipes[3][2])
+{
+	pipe(pipes[0]);
+	pipe(pipes[1]);
+	pipe(pipes[2]);
 }
 
 /*
@@ -37,19 +49,25 @@ read program 2 from parent and write to outfile
 */
 int	pipex(t_args_d *args, t_argv *argv)
 {
-	int		pipes[2][3];
+	int		pipx[3][2];
+	pid_t	pids[2];
+	int		return_status;
 
-	pipe(pipes[0]);
-	pipe(pipes[1]);
-	pipe(pipes[2]);
-	if (fork() > 0)
-		//write()
-		if (fork() > 0)
+	create_pipes(pipx);
+	pids[0] = fork();
+	if (pids[0] > 0)
+	{
+		pids[1] = fork();
+		if (pids[1] > 0)
 		{
-			
+			write_infile(pipx[0][1], args);
+			waitpid(pids[0], 0, 0);
+			waitpid(pids[1], 0, 0);
+			write_outfile(pipx[2][0], args);
 		}
 		else
-			forked(1, args, argv, pipes[2]);
+			forked(1, args, argv, pipx);
+	}
 	else
-		forked(0, args, argv, pipes[0]);
+		forked(0, args, argv, pipx);
 }

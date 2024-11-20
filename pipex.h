@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ggasset- <ggasset-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: germangasset <germangasset@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 13:07:30 by ggasset-          #+#    #+#             */
-/*   Updated: 2024/11/18 20:06:44 by ggasset-         ###   ########.fr       */
+/*   Updated: 2024/11/20 16:54:35 by germangasse      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PIPEX_H
 
 # include <unistd.h>
+# include <fcntl.h>
 # include "libft/libft.h"
 
 typedef char	t_bool;
@@ -33,11 +34,17 @@ typedef struct s_argv
 	char	**argv2;
 }	t_argv;
 
+/*
+	TODO:
+		Close pipex file descriptors
+*/
 int			main(int argc, char *argv[], char *envp[]);
 int			pipex(t_args_d *args, t_argv *argv);
-t_args_d	*parse_args(int argc, char *argv[], char *envp[]);
-t_bool		free_args_d(t_args_d *args);
-t_argv		*get_program_argv(char *argv[]);
-t_bool		free_argv(t_argv *argv);
+int			write_infile(int write_fd, t_args_d *args);
+int			write_outfile(int read_fd, t_args_d *args);
+t_args_d	*parse_args(int argc, char *argv[], char *envp[]); // TODO
+t_bool		free_args_d(t_args_d *args); //TODO
+t_argv		*get_program_argv(char *argv[]); // TODO
+t_bool		free_argv(t_argv *argv); // TODO
 
 #endif
