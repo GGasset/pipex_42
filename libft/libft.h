@@ -6,7 +6,7 @@
 /*   By: ggasset- <ggasset-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 15:06:22 by ggasset-          #+#    #+#             */
-/*   Updated: 2024/11/20 17:21:29 by ggasset-         ###   ########.fr       */
+/*   Updated: 2024/11/21 12:33:45 by ggasset-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strjoin_free(char const *s1, char const *s2, int free1, int free2);
 char	*ft_strtrim(char const *s1, char const *set);
 char	**ft_split(char const *s1, char c);
+void	ft_free_splitted(char **split_output);
 char	*ft_itoa(int n);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void	ft_striteri(char *s, void (*f)(unsigned int, char*));

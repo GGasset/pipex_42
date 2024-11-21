@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   args.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ggasset- <ggasset-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ggasset- <ggasset-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 16:04:22 by ggasset-          #+#    #+#             */
-/*   Updated: 2024/11/18 19:12:52 by ggasset-         ###   ########.fr       */
+/*   Updated: 2024/11/21 12:40:21 by ggasset-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,32 @@ t_args_d	*parse_args(int argc, char *argv[], char *envp[])
 	return (output);
 }
 
+static void	fill_argv(size_t program_n, t_argv *args, char *argv[])
+{
+	char	**prog_argv;
+	char	*to_parse;
+
+	to_parse = argv[2 + program_n];
+	prog_argv = ft_split(to_parse, ' ');
+	*((&args->argv1) + program_n) = prog_argv;
+}
+
 t_argv	*get_program_argv(char *argv[])
-{}
+{
+	t_argv	*out;
+	
+	out = malloc(sizeof(t_argv));
+	if (!out)
+		return (0);
+	ft_bzero(out, sizeof(t_argv));
+	fill_argv(0, out, argv);
+	fill_argv(1, out, argv);
+	if (!out->argv1 || !out->argv2)
+	{
+		ft_free_splitted(out->argv1);
+		ft_free_splitted(out->argv2);
+		free(out);
+		out = 0;
+	}
+	return (out);
+}

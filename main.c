@@ -6,7 +6,7 @@
 /*   By: ggasset- <ggasset-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 13:29:13 by ggasset-          #+#    #+#             */
-/*   Updated: 2024/11/20 17:21:06 by ggasset-         ###   ########.fr       */
+/*   Updated: 2024/11/20 21:13:33 by ggasset-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,11 @@ int	main(int argc, char *argv[], char *envp[])
 	if (!args_data)
 		return (ft_putstr_fd(usage_str, 3) > 0);
 	prog_argv = get_program_argv(argv);
+	if (!prog_argv)
+	{
+		notify_return_status(-1);
+		return (free_args_d(args_data));
+	}
 	return_status = pipex(args_data, prog_argv);
 	free_args_d(args_data);
 	free_argv(prog_argv);
