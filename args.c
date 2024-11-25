@@ -6,15 +6,24 @@
 /*   By: ggasset- <ggasset-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 16:04:22 by ggasset-          #+#    #+#             */
-/*   Updated: 2024/11/21 12:40:21 by ggasset-         ###   ########.fr       */
+/*   Updated: 2024/11/22 11:57:09 by ggasset-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
+// If is a path (contains any /) and it doesn't start with / add ./ at the begining
+// Substitute any ./ with $PWD/
+// Otherwise:
+//	Search path by trying to open files and look at errors
 static char	*get_path(char *path, char *envp[])
 {
-	
+	char	*is_path;
+
+	path = ft_substr()
+	is_path = ft_strchr(path, '/');
+	if (is_path && is_path != path)
+		ft_strjoin('./', path);
 }
 
 t_args_d	*parse_args(int argc, char *argv[], char *envp[])
@@ -47,8 +56,14 @@ static void	fill_argv(size_t program_n, t_argv *args, char *argv[])
 {
 	char	**prog_argv;
 	char	*to_parse;
+	char	*tmp;
+	char	*tmp2;
 
 	to_parse = argv[2 + program_n];
+	tmp = ft_strchr(to_parse, '/') + 1;
+	tmp2 = ft_strchr(to_parse, ' ') + 1;
+	if ((!tmp2 && tmp) || (tmp < tmp2 && !tmp && !tmp2))
+		to_parse = tmp;
 	prog_argv = ft_split(to_parse, ' ');
 	*((&args->argv1) + program_n) = prog_argv;
 }
