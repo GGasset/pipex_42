@@ -6,7 +6,7 @@
 /*   By: ggasset- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 12:50:10 by ggasset-          #+#    #+#             */
-/*   Updated: 2024/09/24 16:58:26 by ggasset-         ###   ########.fr       */
+/*   Updated: 2024/11/26 15:08:58 by ggasset-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 	unsigned int	i;
 
 	if (!f)
-		return (0);
+		return ;
 	len = ft_strlen(s);
 	i = 0;
 	while (i < len)

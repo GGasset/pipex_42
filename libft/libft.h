@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ggasset- <ggasset-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: ggasset- <ggasset-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 15:06:22 by ggasset-          #+#    #+#             */
-/*   Updated: 2024/11/21 12:33:45 by ggasset-         ###   ########.fr       */
+/*   Updated: 2024/11/27 15:34:09 by ggasset-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	*ft_calloc(size_t nmeb, size_t size);
 char	*ft_strdup(const char *s);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strjoin(char const *s1, char const *s2);
-char	*ft_strjoin_free(char const *s1, char const *s2, int free1, int free2);
+char	*ft_strjoin_free(char *s1, char *s2, int free1, int free2);
 char	*ft_strtrim(char const *s1, char const *set);
 char	**ft_split(char const *s1, char c);
 void	ft_free_splitted(char **split_output);
