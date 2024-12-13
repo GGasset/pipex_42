@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   io.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ggasset- <ggasset-@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: ggasset- <ggasset-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 16:03:06 by germangasse       #+#    #+#             */
-/*   Updated: 2024/11/20 17:21:03 by ggasset-         ###   ########.fr       */
+/*   Updated: 2024/11/26 18:07:02 by ggasset-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	write_outfile(int read_fd, t_args_d *args)
 	int		outfile_fd;
 	char	*outfile;
 	char	buff[1];
-	
+
 	while (read(read_fd, buff, 1) > 0)
 		outfile = ft_strjoin_free(outfile, buff, 1, 0);
 	outfile_fd = open(args->outfile, O_WRONLY | O_CREAT);
