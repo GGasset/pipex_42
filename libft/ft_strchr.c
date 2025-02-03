@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ggasset- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ggasset- <ggasset-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 18:27:51 by ggasset-          #+#    #+#             */
-/*   Updated: 2024/09/27 17:13:53 by ggasset-         ###   ########.fr       */
+/*   Updated: 2025/01/27 13:08:22 by ggasset-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ char	*ft_strchr(const char *s, int c)
 {
 	int		i;
 
+	if (!s)
+		return (0);
 	c = (char)c;
 	i = 0;
 	while (1)
