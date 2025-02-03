@@ -6,7 +6,7 @@
 /*   By: ggasset- <ggasset-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 15:14:16 by ggasset-          #+#    #+#             */
-/*   Updated: 2024/12/10 14:30:45 by ggasset-         ###   ########.fr       */
+/*   Updated: 2025/01/24 16:18:09 by ggasset-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ int	file_exists(char *file_path)
 {
 	int		file_fd;
 
+	if (!file_path)
+		return (0);
 	file_fd = open(file_path, O_RDONLY);
 	if (file_fd != -1)
 	{

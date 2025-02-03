@@ -6,7 +6,7 @@
 /*   By: ggasset- <ggasset-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 16:04:22 by ggasset-          #+#    #+#             */
-/*   Updated: 2024/12/11 13:34:45 by ggasset-         ###   ########.fr       */
+/*   Updated: 2025/02/03 12:54:17 by ggasset-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	check_path(char **file_path)
 // Substitute starting ./ if any with $PWD/
 // Otherwise:
 //	Search path by trying to open files and look at errors
-static char	*get_path(char *path, char *envp[], int must_exist)
+static char	*get_path(char *path, char *envp[])
 {
 	char	*is_path;
 	char	*pwd;
@@ -34,12 +34,12 @@ static char	*get_path(char *path, char *envp[], int must_exist)
 	pwd = ft_strjoin(get_envp("PWD", envp), "/");
 	path = ft_strdup(path);
 	if (ft_strchr(path, ' '))
-		substr_free(&path, 0, (size_t)ft_strchr(path, ' ') - (size_t)path);
+		path = substr_free(path, (size_t)ft_strchr(path, ' ') - (size_t)path);
 	is_path = ft_strchr(path, '/');
-	if (is_path && is_path != path && ft_strchr(path, '~') != path)
+	if (is_path && is_path != path)
 		path = ft_strjoin_free("./", path, 0, 1);
 	path = replace_start(path, "./", pwd, 1);
-	if (is_path)
+	if (ft_strchr(path, '/') == path)
 	{
 		free(pwd);
 		return (path);
@@ -47,8 +47,6 @@ static char	*get_path(char *path, char *envp[], int must_exist)
 	out = get_from_path(path, envp);
 	if (!out)
 		out = ft_strjoin(pwd, path);
-	if (must_exist)
-		check_path(&out);
 	free(pwd);
 	free(path);
 	return (out);
@@ -64,18 +62,12 @@ t_args_d	*parse_args(int argc, char *argv[], char *envp[])
 	if (!output)
 		return (0);
 	ft_bzero((void *)output, sizeof(t_args_d));
-	output->infile = get_path(argv[1], envp, 1);
-	if (!output->infile)
-		return (free_args_d(output) + 1);
-	output->program1 = get_path(argv[2], envp, 1);
-	if (!output->program1)
-		return (free_args_d(output) + 2);
-	output->program2 = get_path(argv[3], envp, 1);
-	if (!output->program2)
-		return (free_args_d(output) + 3);
-	output->outfile = get_path(argv[4], envp, 0);
-	if (!output->outfile)
-		return (free_args_d(output) + 4);
+	output->infile = get_path(argv[1], envp);
+	output->program1 = get_path(argv[2], envp);
+	check_path(&output->program1);
+	output->program2 = get_path(argv[3], envp);
+	check_path(&output->program2);
+	output->outfile = get_path(argv[4], envp);
 	output->envp = envp;
 	return (output);
 }
@@ -104,6 +96,7 @@ t_argv	*get_program_argv(char *argv[])
 	if (!out)
 		return (0);
 	ft_bzero(out, sizeof(t_argv));
+	out->prog_argv = argv;
 	fill_argv(0, out, argv);
 	fill_argv(1, out, argv);
 	return (out);
